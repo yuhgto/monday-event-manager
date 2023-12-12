@@ -1,11 +1,11 @@
 import express from "express";
 import { Logger } from "@mondaycom/apps-sdk";
-import { transformText } from "./src/transformation-service.js";
+import { transformText } from "./src/services/transformation-service.js";
 import { authorizeRequest } from "./src/middleware.js";
-import { changeColumnValue, getColumnValue } from "./src/monday-api-service.js";
+import { changeColumnValue, getColumnValue } from "./src/services/monday-api-service.js";
 import { getSecret, isDevelopmentEnv, getEnv } from "./src/helpers.js";
 import dotenv from "dotenv";
-import { readQueueMessage, produceMessage } from "./src/queue-service.js";
+import { readQueueMessage, produceMessage } from "./src/services/queue-service.js";
 dotenv.config();
 
 const logTag = "ExpressServer";
