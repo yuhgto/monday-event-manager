@@ -21,6 +21,6 @@ export const authorizeRequest = (req, res, next) => {
     next();
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ error: "Not authenticated" });
+    res.status(401).json({ error: "Not authenticated" });
   }
 };
