@@ -3,12 +3,16 @@
   "version": "1.7.0",
   "description": "",
   "main": "index.js",
+  "config": {
+    "appVersionId": "YOUR_APP_VERSION_ID_HERE"
+  },
   "scripts": {
     "start": "NODE_ENV=production node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "mapps code:push -i $npm_package_config_appVersionId",
     "dev:expose": "mapps tunnel:create -p 8080",
-    "dev:server": "nodemon index.js",
-    "dev": "concurrently \"npm run dev:server\" \"npm run dev:expose\""
+    "dev:server": "nodemon index.js --trace-warnings",
+    "dev": "kill-port 8080 && concurrently \"npm run dev:server\" \"npm run dev:expose\""
   },
   "author": "Dipro Bhowmik",
   "license": "ISC",
@@ -24,6 +28,7 @@
     "@mondaycom/apps-cli": "^2.0.1",
     "concurrently": "^8.2.2",
     "eslint": "^8.47.0",
+    "kill-port": "^2.0.1",
     "nodemon": "^3.0.1"
   }
 }
