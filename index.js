@@ -3,7 +3,8 @@ import { Logger } from "@mondaycom/apps-sdk";
 import dotenv from "dotenv";
 dotenv.config();
 
-import transformTextFeature from "./src/actions/transformText/index.js"
+import transformTextFeature from "./src/actions/transformText/index.js";
+import dateSchedulerFeature from "./src/actions/scheduleDate/index.js";
 import { getSecret, isDevelopmentEnv, getEnv } from "./src/helpers.js";
 import { readQueueMessage, produceMessage } from "./src/services/queue-service.js";
 
@@ -18,6 +19,7 @@ const currentUrl = getSecret(SERVICE_TAG_URL);
 const app = express();
 app.use(express.json());
 app.use('/transform_text', transformTextFeature);
+app.use('/date_scheduler', dateSchedulerFeature);
 
 app.get("/", (req, res) => {
   res.status(200).send({ message: "healthy" });

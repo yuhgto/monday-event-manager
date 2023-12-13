@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "config": {
-    "appVersionId": "YOUR_APP_VERSION_ID_HERE"
+    "appVersionId": "10179972"
   },
   "scripts": {
     "start": "NODE_ENV=production node index.js",

@@ -24,3 +24,17 @@ export const authorizeRequest = (req, res, next) => {
     res.status(401).json({ error: "Not authenticated" });
   }
 };
+
+export const logRequest = (req, res, next) => {
+  const logTag = "RequestLogger"
+  const logger = new Logger(logTag);
+  logger.info(JSON.stringify(
+    {
+      message: "New request received",
+      path: req.originalUrl,
+      body: req.body,
+      headers: req.headers,
+    }
+  ))
+  next()
+}

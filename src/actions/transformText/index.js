@@ -15,11 +15,11 @@ const logger = new Logger(logTag);
 const TO_UPPER_CASE = "TO_UPPER_CASE";
 const TO_LOWER_CASE = "TO_LOWER_CASE";
 
-router.post("/execute_action", authorizeRequest, async (req, res) => {
+router.post("/monday/execute_action", authorizeRequest, async (req, res) => {
   logger.info(
     JSON.stringify({
       message: "New request received",
-      path: "/action",
+      path: "/transformText/monday/execute_action",
       body: req.body,
       headers: req.headers,
     })
@@ -61,7 +61,7 @@ router.post("/execute_action", authorizeRequest, async (req, res) => {
   }
 });
 
-router.post("/get_remote_list_options", authorizeRequest, async (req, res) => {
+router.post("/monday/get_remote_list_options", authorizeRequest, async (req, res) => {
   const TRANSFORMATION_TYPES = [
     { title: "to upper case", value: TO_UPPER_CASE },
     { title: "to lower case", value: TO_LOWER_CASE },
