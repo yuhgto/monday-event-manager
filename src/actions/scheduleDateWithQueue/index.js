@@ -8,7 +8,6 @@
 import express from "express";
 import { Logger, Queue } from "@mondaycom/apps-sdk";
 import { authorizeRequest, logRequest } from "../../middleware.js";
-import { getColumnValue, changeColumnValue } from "../../services/monday-api-service.js";
 const router = express.Router();
 
 const logTag = "DateSchedulerWithQueueFeature"
