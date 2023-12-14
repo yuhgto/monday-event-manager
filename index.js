@@ -5,6 +5,7 @@ dotenv.config();
 
 import transformTextFeature from "./src/actions/transformText/index.js";
 import dateSchedulerFeature from "./src/actions/scheduleDate/index.js";
+import getAddressFeature from "./src/actions/getAddress/index.js";
 import { getSecret, isDevelopmentEnv, getEnv } from "./src/helpers.js";
 import { readQueueMessage, produceMessage } from "./src/services/queue-service.js";
 
@@ -20,6 +21,7 @@ const app = express();
 app.use(express.json());
 app.use('/transform_text', transformTextFeature);
 app.use('/date_scheduler', dateSchedulerFeature);
+app.use('/get_address', getAddressFeature);
 
 app.get("/", (req, res) => {
   res.status(200).send({ message: "healthy" });
