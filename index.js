@@ -6,8 +6,10 @@ dotenv.config();
 import transformTextFeature from "./src/actions/transformText/index.js";
 import dateSchedulerFeature from "./src/actions/scheduleDate/index.js";
 import getAddressFeature from "./src/actions/getAddress/index.js";
+import dateSchedulerWithQueueFeature from "./src/actions/scheduleDateWithQueue/index.js"
 import { getSecret, isDevelopmentEnv, getEnv } from "./src/helpers.js";
-import { readQueueMessage, produceMessage } from "./src/services/queue-service.js";
+import { readQueueMessage } from "./src/services/queue-service.js";
+import { logRequest } from "./src/middleware.js";
 
 const logTag = "ExpressServer";
 const PORT = "PORT";
@@ -21,30 +23,15 @@ const app = express();
 app.use(express.json());
 app.use('/transform_text', transformTextFeature);
 app.use('/date_scheduler', dateSchedulerFeature);
+app.use('/date_scheduler_queue', dateSchedulerWithQueueFeature);
 app.use('/get_address', getAddressFeature);
 
 app.get("/", (req, res) => {
   res.status(200).send({ message: "healthy" });
 });
 
-
 app.post(
-    "/produce",
-    async (req, res) => {
-        try {
-            const { body } = req;
-            const message = JSON.stringify(body);
-            const messageId = await produceMessage(message);
-            return res.status(200).send({ messageId });
-        } catch (err) {
-            logger.error(JSON.stringify(err));
-            return res.status(500).send({ message: "internal server error" });
-        }
-    }
-);
-
-app.post(
-    "/mndy-queue",
+    "/mndy-queue", logRequest,
     async (req, res) => {
         try {
             const { body, query } = req;
