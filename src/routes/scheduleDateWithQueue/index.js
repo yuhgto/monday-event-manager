@@ -14,6 +14,11 @@ const logTag = "DateSchedulerWithQueueFeature"
 const logger = new Logger(logTag);
 const queue = new Queue();
 
+// delete this when doing boilerplate
+router.get("/oauth", (req, res) => {
+    res.redirect("/oauth2/start");
+})
+
 router.post("/execute_action", authorizeRequest, logRequest, async (req, res) => {
     try {
         const { shortLivedToken } = req.session;

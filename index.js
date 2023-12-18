@@ -3,10 +3,11 @@ import { Logger } from "@mondaycom/apps-sdk";
 import dotenv from "dotenv";
 dotenv.config();
 
-import transformTextFeature from "./src/actions/transformText/index.js";
-import dateSchedulerFeature from "./src/actions/scheduleDate/index.js";
-import getAddressFeature from "./src/actions/getAddress/index.js";
-import dateSchedulerWithQueueFeature from "./src/actions/scheduleDateWithQueue/index.js"
+import transformTextFeature from "./src/routes/transformText/index.js";
+import dateSchedulerFeature from "./src/routes/scheduleDate/index.js";
+import getAddressFeature from "./src/routes/getAddress/index.js";
+import dateSchedulerWithQueueFeature from "./src/routes/scheduleDateWithQueue/index.js"
+import oauthRoutes from "./src/routes/oauth2/index.js"
 import { getSecret, isDevelopmentEnv, getEnv } from "./src/helpers.js";
 import { readQueueMessage } from "./src/services/queue-service.js";
 import { logRequest } from "./src/middleware.js";
@@ -25,6 +26,7 @@ app.use('/transform_text', transformTextFeature);
 app.use('/date_scheduler', dateSchedulerFeature);
 app.use('/date_scheduler_queue', dateSchedulerWithQueueFeature);
 app.use('/get_address', getAddressFeature);
+app.use('/oauth2', oauthRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).send({ message: "healthy" });
