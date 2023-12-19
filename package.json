@@ -6,6 +6,9 @@
   "config": {
     "appVersionId": "10179972"
   },
+  "nodemonConfig": {
+    "ignore": ["local-secure-storage.db.json"]
+  },
   "scripts": {
     "start": "NODE_ENV=production node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",

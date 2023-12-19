@@ -25,7 +25,7 @@ export const readQueueMessage = async ({ body, query }) => {
         const {itemId, boardId, inputColumn, outputColumn, numberOfDays, scheduler_type} = body.inputs;
         const inputDateString = await getColumnValue(mondayToken, itemId, inputColumn); // this is a JSON string
         const inputDate = JSON.parse(inputDateString)
-        logger.info(`Input date is - ${inputDate}`);
+        logger.info(`Input date is - ${JSON.stringify(inputDate)}`);
         let outputDate;
         if (scheduler_type.value === 'add') {
             outputDate = new Date(inputDate.date);
