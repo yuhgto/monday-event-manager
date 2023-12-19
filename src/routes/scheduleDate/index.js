@@ -22,7 +22,9 @@ router.post("/execute_action", authorizeRequest, logRequest, async (req, res) =>
         const inputDateString = await getColumnValue(shortLivedToken, itemId, inputColumn); // this is a JSON string
         const inputDate = JSON.parse(inputDateString)
         logger.info(`Input date is - ${inputDate}`);
+
         let outputDate;
+
         if (scheduler_type.value === 'add') {
             outputDate = new Date(inputDate.date);
             outputDate.setDate(outputDate.getDate() + numberOfDays);
@@ -31,6 +33,7 @@ router.post("/execute_action", authorizeRequest, logRequest, async (req, res) =>
             outputDate.setDate(outputDate.getDate() - numberOfDays);
         }
         const outputDateForApi = JSON.stringify({date: outputDate.toISOString().substring(0,10)})
+        
         const result = await changeColumnValue(shortLivedToken, boardId, itemId, outputColumn, outputDateForApi);
         logger.info(`Output date is ${outputDate.toISOString().substring(0,10)} & result is ${JSON.stringify(result)}`);
         res.status(200).send();

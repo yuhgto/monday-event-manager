@@ -54,22 +54,8 @@ router.post(
         scheduler_type,
       } = req.body.payload.inputFields;
       const { integrationId, recipeId } = req.body.payload;
-      // Send job to queue
-      const messageForQueue = JSON.stringify({
-        job: "schedule_date",
-        inputs: {
-          itemId,
-          boardId,
-          inputColumn,
-          outputColumn,
-          numberOfDays,
-          scheduler_type,
-        },
-        integrationId: integrationId,
-      });
-      logger.info(messageForQueue);
-      const messageId = queue.publishMessage(messageForQueue);
-      res.status(201).send(messageId);
+      // TODO: Send job to queue
+      
     } catch (error) {
       logger.error(error);
       res.status(500).send({ message: "Internal server error" });

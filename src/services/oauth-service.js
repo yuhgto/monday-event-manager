@@ -19,15 +19,9 @@ export const redirectToOAuthPage = async (req, res) => {
     const { accountId, userId, boardId, backToUrl } = authHeaderPayload;
     logger.info({ msg: "auth header", authHeaderPayload });
 
-    // generate state as JWT
-    const statePayload = {
-      accountId,
-      userId,
-      boardId,
-      backToUrl,
-    };
-    const state = jwt.sign(statePayload, SIGNING_SECRET);
+    // TODO: generate state as JWT
 
+    
     // redirect to oauth URL with client ID
     res.redirect(
       AUTHORIZATION_URL +
@@ -114,19 +108,10 @@ export const sendTokenRequest = async (req, res) => {
       throw new Error();
     }
 
-    // store token
-    const statePayload = jwt.decode(state);
-    const { accountId, userId } = statePayload;
-    const storageKey = `account:${accountId}:user:${userId}`;
-    const result = await secureStorage.set(storageKey, resJson);
-    logger.info({
-      msg: "stored key in db",
-      data: { storageKey, value: resJson, result },
-    });
-    if (result) {
-      // send success back
-      res.status(200).send({ message: "Access token received and stored" });
-    }
+    // TODO: store access token with unique key
+    
+    // send success back
+    res.status(200).send();
   } catch (error) {
     logger.error(error);
     res.status(500).send();
