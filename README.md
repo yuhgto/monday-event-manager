@@ -8,6 +8,6 @@ Switch to the [feat/add-app-features](https://github.com/yuhgto/monday-event-man
 
 ## Want to follow along? 
 
-Switch to the feat/starter-code-for-training branch. 
+Switch to the [feat/starter-code-for-training](https://github.com/yuhgto/monday-event-manager/tree/feat/starter-code-for-training) branch. 
 
 Check `SETUP.md` for instructions on what to set up. 
