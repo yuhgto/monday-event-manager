@@ -20,6 +20,7 @@ export const redirectToOAuthPage = async (req, res) => {
     logger.info({ msg: "auth header", authHeaderPayload });
 
     // TODO: generate state as JWT
+    const state = 'abcd1234'
 
     
     // redirect to oauth URL with client ID
